@@ -21,31 +21,31 @@ timezone:
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Chirpy                          # the main title
+title: pash.by                          # the main title
 
-tagline: A text-focused Jekyll theme   # it will display as the sub-title
+tagline: 1010 1000   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  A minimal, responsive, and powerful Jekyll theme for presenting professional writing.
+ This is a blog site about techy things and sometimes personal things. 
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: ''
 
 github:
-  username: github_username             # change to your github username
+  username: mmpashby             # change to your github username
 
 twitter:
-  username: twitter_username            # change to your twitter username
+  username: MarkPashby            # change to your twitter username
 
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: your_full_name
-  email: example@doamin.com             # change to your email address
+  name: mmpashby
+  email: mark@pash.by 
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username      # change to your twitter homepage
-    - https://github.com/username       # change to your github homepage
+    - https://twitter.com/MarkPashby      # change to your twitter homepage
+    - https://github.com/mmpashby       # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
@@ -84,6 +84,7 @@ img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
 avatar:
+  '/commons/avatar.png'
 
 # boolean type, the global switch for ToC in posts.
 toc: true
