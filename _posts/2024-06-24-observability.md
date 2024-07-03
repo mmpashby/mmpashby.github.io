@@ -8,7 +8,7 @@ tags: [tech, sre, observability]
 
 Welcome to our exploration of observability! Whether you're a newcomer or a seasoned pro like myself looking for a refresher, you're in the right place. Grab a cup of tea, settle in, and let's dive into the realms of observability, site reliability engineering, alerting, and incident management. This mini-series will break down these complex topics into manageable parts, ensuring a smooth and informative read.
 
-# Introduction
+## Introduction
 
 So, what exactly is observability engineering? Simply put, it's the ability to monitor, measure, and understand the state of a system or application through its external outputs.
 
@@ -18,13 +18,13 @@ In the same way, observability is crucial in modern software engineering. Master
 
 As for my background, I’ve been in the observability field for years, working with network devices, server hardware, monolithic applications, micro-services, and event-driven architecture. I’ve designed and implemented platforms capable of handling tens of thousands of data points per second. My experience spans creating "observability in a box" solutions, offering platform-as-a-product services that software engineering teams can easily integrate with. I bring a wealth of knowledge and strong opinions on the subject.
 
-# The Three Pillars of Observability - Logs
+## The Three Pillars of Observability - Logs
 
 Warning, there be strong opionions here.
 
 What are these three pillars of observability then? Great question, and this isn't a conclusion and term that I have coined, this was other super smart engineers in the observability space. I am only going to be covering logs in this post, because during the draft it was getting quite long and I want to make this a fairly digestable series.
 
-## Pillar One - Logs/Event-Logs
+### Pillar One - Logs/Event-Logs
 
 Wait a minute, why Logs and/or Event-Logs? Whats the difference? Dont panic, we will get into that in a minute or two. Essentially, logs are human-readable flat text files that are used by engineers to capture useful data about their systems/services. Log messages occur when a developer deems it important to tell the system or application owner that something happened that they should probably know about. For example, your service could be dropping requests, and you should probably know why sooner rather than later.
 
@@ -57,7 +57,7 @@ This was just purely a random example of how an application/service might log a 
 
 ![Teamwork!](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTA4NnYzc3hieHBoeHhxN3JvdWZodjBxMGJtd3E0ZGxweTdjeG5uayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dSetNZo2AJfptAk9hp/giphy.gif)
 
-Now, some of the observant amoungst you may have remembered that we were going to discuss the difference between logs and event-logs. Don't Worry, I haven't forgotten! I also don't want to cover this topic in too much detail because otherwise the post will bloat quite significantly, but I will link you to some excellent views from the superstar of Observability Engineering, [Charity Majors](https://twitter.com/mipsytipsy). [Event-logs](https://charity.wtf/2019/02/05/logs-vs-structured-events/) are just better than logs. Thats right, to the annals of history with you logs! "But before we stand on that hill with you, Mark, can you tell us what the difference is, please?" Alright, I hear you. Event-logs are structured logs, and they follow a standardised format (JSON), which makes it trivial to parse and query for most centralised observability platforms. Let's take the log example from before and put that into an event-log:
+Now, some of the observant amongst you may have remembered that we were going to discuss the difference between logs and event-logs. Don't Worry, I haven't forgotten! I also don't want to cover this topic in too much detail because otherwise the post will bloat quite significantly, but I will link you to some excellent views from the superstar of Observability Engineering, [Charity Majors](https://twitter.com/mipsytipsy). [Event-logs](https://charity.wtf/2019/02/05/logs-vs-structured-events/) are just better than logs. Thats right, to the annals of history with you logs! "But before we stand on that hill with you, Mark, can you tell us what the difference is, please?" Alright, I hear you. Event-logs are structured logs, and they follow a standardised format (JSON), which makes it trivial to parse and query for most centralised observability platforms. Let's take the log example from before and put that into an event-log:
 
 ```
 {
