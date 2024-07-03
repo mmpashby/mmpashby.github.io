@@ -25,11 +25,30 @@ As you can probably tell, I am a terrible writer. I need to practice, and to do 
 
 **Passions:**
 
-- Comedy. I like jokes.
-- Films/TV Shows.
-- Science.
-- Reading.
-- Travelling.
+- Comedy. I like jokes
+- Films/TV Shows
+- Science
+- Reading & Podcasts
+- Travelling
+
+
+**Books Read in 2024**
+
+- How Westminster Works...and Why It Doesn't by Ian Dunt
+
+**Books Read in 2023**
+
+- Think Like a CTO by Alan Williamson
+- The Staff Engineers Path by Tanya Reilly
+- Seven Ways to Change the World by Gordon Brown
+- Wiring the Winning Organisation by Gene Kim & Steven J. Spear
+
+**Books Read in 2022**
+
+- Staff Engineer: Leadership beyond the mangagement track by Will Larson
+- AWS Security by Dylan Shields
+- The Mathematics of Secrets by Joshua Holden
+- We Are Bellingcat by Eliot Higgins
 
 **Books Read in 2021**
 
@@ -37,6 +56,9 @@ As you can probably tell, I am a terrible writer. I need to practice, and to do 
 - What Everyone Needs To Know About Tax: An Introduction to the UK Tax SYstem by James Hannam
 - Radical Candor by Kim Scott
 - The Lean Product Playbook by Dan Olsen
+- Accelerate by Nicole Forsgren, Jez Humble and Gene Kim
+- How Spies Think by David Omand
+
 
 **Books Read in 2020**
 
