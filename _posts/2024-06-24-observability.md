@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Observability Series - What is Observability? - Logs"
-date: 2024-06-28 12:00:00 +0100
+date: 2024-07-03 12:00:00 +0100
 categories: [tech, sre, observability]
 tags: [tech, sre, observability]
 ---
 
-Welcome to our exploration of observability! Whether you're a newcomer or a seasoned pro like myself looking for a refresher, you're in the right place. Grab a cup of tea, settle in, and let's dive into the realms of observability, site reliability engineering, alerting, and incident management. This mini-series will break down these complex topics into manageable parts, ensuring a smooth and informative read.
+Welcome to our exploration of observability! Whether you're a newcomer or a seasoned software engineer looking for a refresher, you're in the right place. Grab a cup of tea, settle in, and let's dive into the realms of observability, site reliability engineering, alerting, and incident management. This mini-series will break down these complex topics into manageable parts, ensuring a smooth and informative read.
 
 ## Introduction
 
@@ -22,7 +22,7 @@ As for my background, I’ve been in the observability field for years, working 
 
 Warning, there be strong opionions here.
 
-What are these three pillars of observability then? Great question, and this isn't a conclusion and term that I have coined, this was other super smart engineers in the observability space. I am only going to be covering logs in this post, because during the draft it was getting quite long and I want to make this a fairly digestable series.
+What are these three pillars of observability then? Great question, and this isn't a conclusion and term that I have coined, this was created by super smart engineers in the observability space. I am only going to be covering logs in this post, because during the draft it was getting quite long and I want to make this a fairly digestable series.
 
 ### Pillar One - Logs/Event-Logs
 
@@ -37,7 +37,7 @@ Let's look at a good example of a log file:
 ```
 *Source: The Path from Logs to Traces, by Alex Vondrak*
 
-The example starts with a timestamp and a PID (Process ID) `[2021-02-23T13:26:23.505892 #22473]`, which is incredibly important for time-series investigation. If the logging entitys configured time is wrong, then this data is effectively useless. Precision timing is cruicial in modern software engineering. Please accept that as my first piece of sage advice - make sure you write **timezone aware code**, and the systems you host on are all connected to accurate centralised time protocol servers.
+The example log line starts with a timestamp and a PID (Process ID) `[2021-02-23T13:26:23.505892 #22473]`, which is incredibly important for time-series investigation. If the logging entity has incorrectly configured time, then this data is effectively useless. Precision timing is cruicial in modern software engineering. Please accept that as my first piece of sage advice - make sure you write **timezone aware code**, and the systems you host on are all connected to accurate centralised time protocol servers.
 
 ![Precision timing is so important](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmVjeWJ3ZHBpZmR4azR6ZjVoYXUzd2cybmt2ZThyam84czExbGN1NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gF5xLnIVPTs62OfVTJ/giphy.gif)
 
@@ -45,15 +45,15 @@ Next up we have the logging level, `INFO` in the example log file. Logging level
 
 ![late night hacking](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGtremM0eXZoMTMzY3U3M2JjeHNqeWJoanE4MHNuZjhlanY2ZnF3ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UqxVRm1IaaIGk/giphy.gif)
 
-Next up we have something called a Uinvsersally Unique Identifier (uuid) v4 `6459ffe1-ea53-4044-aaa3-bf902868f730`, which is basically a randonly generated id to represent the generated request ID in this example. This request ID is important, to help chain events/units of work together for a given request.
+Next up we have something called a Universally unique identifier (uuid) v4 `6459ffe1-ea53-4044-aaa3-bf902868f730`, which is basically a randonly generated id to represent the generated request ID. This request ID is important, to help chain events/units of work together for a given request.
 
-We have a `GET` request next, which is one of the [HTTP verbs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods). It is useful to know the HTTP method used when making a request to a service/web app.
+We have a `GET` request next, which is one of the [HTTP verbs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods). It is useful to know the HTTP method used when making a request to a service or web app.
 
 We then see a request path `/`. In this case, this is the root path of the application/service. We then see `::1` which is the host network address, an [IPv6](https://en.wikipedia.org/wiki/IPv6) localhost address. 
 
-Finally, we have the requiest start time with the timezone UTC offset `2021-02-23 13:26:23 -0800`.
+Finally, we have the request start time with the timezone UTC offset `2021-02-23 13:26:23 -0800`. This is also important to know when the request hit your service or web app, so that you can accurately piece together the events up until a given point.
 
-This was just purely a random example of how an application/service might log a message. There are many other examples out there where a lot of the formatting choices are relatively sensible out-of-the-box. I give another piece of advice to always find a good logging library for your chosen programming language, unless the standard library logger is really good already. You shouldn't want to reinvent the wheel for something like logging, just pick the most popular and easy to use open source solution. If you wan't to make modifications, then fork it, and create a new package, but always [inner source](https://en.wikipedia.org/wiki/Inner_source) it for your engineering team to encourage internal contributions.
+This was just purely a random example of how an application or service might log a message. There are many other examples out there where a lot of the formatting choices are relatively sensible out-of-the-box. I give another piece of advice to always find a good logging library for your chosen programming language, unless the standard library logger is really good already. You shouldn't want to reinvent the wheel for something like logging, just pick the most popular and easy to use open source solution. If you wan't to make modifications, then fork it, and create a new package, but always [inner source](https://en.wikipedia.org/wiki/Inner_source) it for your engineering team to encourage internal contributions. For example, the software engineers in your org might want to add standardised fields, or even masking of data before it is sent out on the wire.
 
 ![Teamwork!](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTA4NnYzc3hieHBoeHhxN3JvdWZodjBxMGJtd3E0ZGxweTdjeG5uayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dSetNZo2AJfptAk9hp/giphy.gif)
 
@@ -74,12 +74,12 @@ Now, some of the observant amongst you may have remembered that we were going to
 ```
 *Source: The Path from Logs to Traces, by Alex Vondrak*
 
-I think you'll agree it's even easier to read in it's raw format. Lastly on event-logs - always emit a single event per request per service that it hits. Use the (Open Telemetry conventions)[https://opentelemetry.io/docs/specs/otel/logs/event-api/#event-data-model] and **ALWAYS** fire off an event before the request errors or exits the service, otherwise you have no breadcrumbs for your investigation! Also, if you have distributed systems, include a `trace_id` to pass onto other services in the stream.
+I think you'll agree it's even easier to read in it's raw format. Lastly on event-logs - always emit a single event per request per service that it hits. Use the [Open Telemetry conventions](https://opentelemetry.io/docs/specs/otel/logs/event-api/#event-data-model) and **ALWAYS** fire off an event before the request errors or exits the service, otherwise you have no breadcrumbs for your investigation! Also, if you have distributed systems, include a `trace_id` to pass onto other services in the stream.
 
 
 ## Wrap Up
 
-Ohh, that isn't the last piece of advice regarding logs actually. My last piece of advice is to just avoid putting Personally Identifiable Information (PII) into your logs. You don't need it. If you have an anonomysed user id's in your data model, you **do not** need to log PII. Your security/compliance team will keep their hair, and you will also be way happier and content. But lets say you must absolutely include the event payloads from publisher event buses in your event-logs, then please please think about your event schemas. I will give a very basic example, but hopefully this highlights the point:
+Ohh, that isn't the last piece of advice regarding logs actually. My last piece of advice is to just avoid putting Personally Identifiable Information (PII) into your logs. You don't need it. If you have an anonymized user id in your data model, you **do not** need to log PII. Your security/compliance team will keep their hair, and you will also be way happier and content. But lets say you must absolutely include the event payloads from publisher event buses in your event-logs, then, please please think about your event schemas. I will give a very basic example, but hopefully this highlights the point:
 
 ```
 {
@@ -107,6 +107,16 @@ Ohh, that isn't the last piece of advice regarding logs actually. My last piece 
 }
 ```
 
-With the field `request.payload`, and the full field of `request.payload.event.user.data.private` I now know everything under that path is private user data, and I can filter/mask that at ingestion time. This is why engineering standardisation is so important in modern engineering orgs. You should agree with your fellow engineering community how to design your schemas to avoid problems later down the line, where mitigating PII data leaking into your observability platforms will be very difficult, and will force you down paths you will not want to go.
+With the field `request.payload`, and the full field path of `request.payload.event.user.data.private` I now know everything under that path is private user data, and I can filter/mask that at ingestion time. This is why engineering standardisation is so important in modern engineering orgs. You should agree with your fellow engineering community how to design your schemas to avoid problems later down the line, where mitigating PII data leaking into your observability platforms will be very difficult, and will force you down paths you will not want to go. I am talking reducing data retention periods to 30 days of warm data kinda craziness.
+
+Let me provide a quick summary of all the sage advice and tips we have covered in this post:
+
+- Be smart, be cool, and write timezone aware code that is hosted on infrastructure that have accurate time servers to hand.
+- You might not want to log requests without any useful information there, instead you may decide to just emit metrics, and thats fine. We will cover metrics in a later blog post.
+- Always make sure you centralise your logging level settings, at the config or runtime variables stage.
+- Always pick a good logging package or module for your chosen programming language. Open source solutions are perfect, and if you must customise it, then inner source so you and your colleagues can add or take away what you need.
+- Event-logs are structured logs and are just way better than bog standard logs. If you had to see some of the regex parsing patterns I have had to create over the years to get logs indexable in observability platforms, you will understand my pain.
+- Always emit a single event per request to your service before exiting or erroring, and stream over the wire to your observability platform of choice, using Open Telemetry Standards.
+- Lastly, do not put PII in your logs. If you absolutely must, work with your fellow engineers to standardise your logging structure, and or your event schemas if you run Event Driven Architecture.
 
 I hope I didn't miss anything important about logging in the world of observability, but if you feel I did, please tweet me and we can chat (my handle is linked on the left). Thanks for reading!
