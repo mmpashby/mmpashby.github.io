@@ -41,11 +41,11 @@ The example log line starts with a timestamp and a PID (Process ID) `[2021-02-23
 
 ![Precision timing is so important](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmVjeWJ3ZHBpZmR4azR6ZjVoYXUzd2cybmt2ZThyam84czExbGN1NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gF5xLnIVPTs62OfVTJ/giphy.gif)
 
-Next up we have the logging level, `INFO` in the example log file. Logging level basically means the "importance" of the log message to the system owner or operator. You may not care about INFO level log messages if your service is designed to accept tens of thousands of REST requests per minute. You may just want to collect metrics for each type of request that comes through. We will get to metrics on a later blog post. The logging level should **ALWAYS** be set at the application/service/runtime vars config stage, and the reason for that is that if you have to change it out in the wild for investigative purposes, ie. change to DEBUG level, you don't want to have to trawl through code in the early hours of the morning and update everywhere where the logging level is set.
+Next up we have the logging level, `INFO` in the example log file. Logging level basically means the "importance" of the log message to the system owner or operator. The logging level should **ALWAYS** be set at the application/service/runtime vars config stage, and the reason for that is that if you have to change it out in the wild for investigative purposes, ie. change to DEBUG level, you don't want to have to trawl through code in the early hours of the morning and update everywhere where the logging level is set.
 
 ![late night hacking](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGtremM0eXZoMTMzY3U3M2JjeHNqeWJoanE4MHNuZjhlanY2ZnF3ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UqxVRm1IaaIGk/giphy.gif)
 
-Next up we have something called a Universally unique identifier (uuid) v4 `6459ffe1-ea53-4044-aaa3-bf902868f730`, which is basically a randonly generated id to represent the generated request ID. This request ID is important, to help chain events/units of work together for a given request.
+Next up we have something called a Universally unique identifier (uuid) v4 `6459ffe1-ea53-4044-aaa3-bf902868f730`, which is basically a randomly generated id to represent the request ID. This request ID is important, to help chain events/units of work together for a given request.
 
 We have a `GET` request next, which is one of the [HTTP verbs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods). It is useful to know the HTTP method used when making a request to a service or web app.
 
@@ -112,7 +112,6 @@ With the field `request.payload`, and the full field path of `request.payload.ev
 Let me provide a quick summary of all the sage advice and tips we have covered in this post:
 
 - Be smart, be cool, and write timezone aware code that is hosted on infrastructure that have accurate time servers to hand.
-- You might not want to log bog standard requests without any useful information there, instead, you may decide to just emit metrics, and thats perfectly fine. We will cover metrics in a later blog post.
 - Always make sure you centralise your logging level settings, at the config or runtime variables stage.
 - Always pick a good logging package or module for your chosen programming language. Open source solutions are perfect, and if you must customise it, then inner source so that you and your colleagues can modify as desired.
 - Event-logs are structured logs and are just way better than bog standard logs. If you had to see some of the regex parsing patterns I have had to create over the years to get logs indexable in observability platforms, you will understand why I stand on that hill.
