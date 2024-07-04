@@ -112,10 +112,10 @@ With the field `request.payload`, and the full field path of `request.payload.ev
 Let me provide a quick summary of all the sage advice and tips we have covered in this post:
 
 - Be smart, be cool, and write timezone aware code that is hosted on infrastructure that have accurate time servers to hand.
-- You might not want to log requests without any useful information there, instead you may decide to just emit metrics, and thats fine. We will cover metrics in a later blog post.
+- You might not want to log bog standard requests without any useful information there, instead, you may decide to just emit metrics, and thats perfectly fine. We will cover metrics in a later blog post.
 - Always make sure you centralise your logging level settings, at the config or runtime variables stage.
-- Always pick a good logging package or module for your chosen programming language. Open source solutions are perfect, and if you must customise it, then inner source so you and your colleagues can add or take away what you need.
-- Event-logs are structured logs and are just way better than bog standard logs. If you had to see some of the regex parsing patterns I have had to create over the years to get logs indexable in observability platforms, you will understand my pain.
+- Always pick a good logging package or module for your chosen programming language. Open source solutions are perfect, and if you must customise it, then inner source so that you and your colleagues can modify as desired.
+- Event-logs are structured logs and are just way better than bog standard logs. If you had to see some of the regex parsing patterns I have had to create over the years to get logs indexable in observability platforms, you will understand why I stand on that hill.
 - Always emit a single event per request to your service before exiting or erroring, and stream over the wire to your observability platform of choice, using Open Telemetry Standards.
 - Lastly, do not put PII in your logs. If you absolutely must, work with your fellow engineers to standardise your logging structure, and or your event schemas if you run Event Driven Architecture.
 
