@@ -47,9 +47,9 @@ First of all, my strong opinion here is that you should pick OpenTelemetry to in
 
 The OpenTel metrics data model structure can be found [here](https://opentelemetry.io/docs/specs/otel/metrics/data-model/#opentelemetry-protocol-data-model). OpenTelemetry has three models:
 
-* The Event model, in which you instrument metrics as the software engineer
-* The Stream model, which OpenTelemetry uses for transport
-* The Timeseries model, which OpenTelemetry uses for storage
+* The **Event model**, in which you instrument metrics as the software engineer
+* The **Stream model**, which OpenTelemetry uses for transport
+* The **Timeseries model**, which OpenTelemetry uses for storage
 
 The OpenTelemetry metrics are constructed by using the global **MeterProvider** to create a **Meter**, and associating it with one or more instruments. An instrument is a specific type of metric (e.g., a counter, gauge, histogram) that you use to collect data about a particular aspect of your service or application's behaviour. You capture measurements by creating instruments that are comprised of:
 
@@ -60,7 +60,7 @@ The OpenTelemetry metrics are constructed by using the global **MeterProvider** 
 
 A single instrument can produce multiple timeseries. A timeseries is a metric model with a unique set of attributes. For example, let’s say you have a Kubernetes cluster; each host in the cluster has a separate timeseries for the same metric name.
 
-It's very important to mention additive instruments at this stage. Additive or summable instruments produce timeseries that, when added up together, produce another meaningful and accurate timeseries. Additive instruments that measure non-decreasing numbers are also called monotonic. For example, `http.server.requests` is an additive timeseries because it can be summed from multiple hosts to get the actual total number of requests from your service if you load balance requests, which you should be doing, of course! There are also synchronous instruments, which are invoked together with the operations they are measuring. For example, +1 to a counter when a request is fired off for your service or application. Lastly, there are also asynchronous instruments, which periodically invoke a callback function to collect measurements. Asynchronous instruments are also known as observers, and observers can be used to periodically measure things like system memory or CPU usage.
+It's very important to mention additive instruments at this stage. Additive or summable instruments produce timeseries that, when added up together, produce another meaningful and accurate timeseries. Additive instruments that measure non-decreasing numbers are also called *monotonic*. For example, `http.server.requests` is an additive timeseries because it can be summed from multiple hosts to get the actual total number of requests from your service if you load balance requests, which you should be doing, of course! There are also synchronous instruments, which are invoked together with the operations they are measuring. For example, +1 to a counter when a request is fired off for your service or application. Lastly, there are also asynchronous instruments, which periodically invoke a callback function to collect measurements. Asynchronous instruments are also known as observers, and observers can be used to periodically measure things like system memory or CPU usage.
 
 ### When to use what type and some examples!
 
@@ -106,7 +106,7 @@ That example is showing the time it takes to do an image enchancement in our CSI
 
 ![Enhance](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmt2dnlpemthZHFnMXZhdG8zN3g1b2YzMGVsdzFiNW1kNmVsbmtseSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YxXYm0dkh95zSHCku1/giphy.gif)
 
-Lets cover one last example of cache hit rates, because we are using **CounterObserver** which if we remember correctly is used to instrument monotonic numbers that are additive/summable:
+Lets cover one last example of cache hit rates, because we are using **CounterObserver** which if we remember correctly is used to instrument *monotonic* numbers that are additive/summable:
 
 {% highlight golang %}
 import "go.opentelemetry.io/otel/metric"
