@@ -6,13 +6,13 @@ order: 4
 
 # About Me
 
-Hi, I am Mark, an IT/Tech Vet with 20+ years experience in various technical and leadership disciplines. I am a literal bag of stardust, living one chemical reaction to the next.
+Hi, I am Mark, an IT/Tech Vet with 20+ years experience in various technical and leadership disciplines. A bag of stardust, living one chemical reaction to the next.
 
-I am an engineer at heart with a passion for security, data and any science related subjects. A big geek, with an appreciation for pop culture nerd humour. An amateur cryptologist with a great passion for the history of cryptography, in-fact I am a friend and patron of Bletchley Park.
+I am an engineer at heart with a passion for security, data and any science related subjects. A big geek, with an appreciation for pop culture nerd humour. An amateur cryptologist with a great passion for the history of cryptography, in-fact I am a friend and patron of Bletchley Park. This passion started after I read 'The Code Book' by Simon Singh, and I try to read the book once every couple of years because I find it fascinating. The need to send secure commuinications has excisted throughout most of human history, and I think the stories behind that make it so important to keep that history alive.
 
 **What Is This Blog For?**
 
-As you can probably tell, I am a terrible writer. I need to practice, and to do that, I need a blog to keep me committed to writing articles that some of you may find interesting.
+As you can probably tell, I need practice as a blogger, and to do that, I need a blog to keep me committed to writing articles that some of you may find interesting and helpful.
 
 **What I Do?**
 
