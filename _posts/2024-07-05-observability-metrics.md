@@ -72,7 +72,7 @@ Some simple guidance on when to use what:
 
 ![Lots of dials and metrics](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3dpMmVkNGVwd3Y0cnRhbjV3dDJxOG9ycWl0b3k3ZWo2ZG52ZTJodSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YWbTFXAVxWOn2HEadR/giphy.gif)
 
-Lets make this fun by doing a few examples! We want to measure the number of requests our startup app sends to social media API's, so we should pick a Counter, and increment whenever a request is sent:
+Lets make this fun by doing a few examples! I've picked golang in the following examples, but there are well supported SDK's/API's in most popular programming languages. We want to measure the number of requests our startup app sends to social media API's, so we should pick a Counter, and increment whenever a request is sent:
 
 {% highlight golang %}
 import "go.opentelemetry.io/otel/metric"
@@ -85,7 +85,7 @@ socialMediaAPIRequestCounter, _ := meter.Int64Counter(
 socialMediaAPIRequestCounter.Add(ctx, 1)
 {% endhighlight %}
 
-Lets do another very quick example with a **Histogram**:
+A simple example, but you can see we are incrementing the counter each time our secret sauce code runs. Lets do another very quick example with a **Histogram**:
 
 {% highlight golang %}
 import "go.opentelemetry.io/otel/metric"
@@ -102,7 +102,7 @@ dur := time.Since(t1)
 opHistogram.Record(ctx, dur.Microseconds())
 {% endhighlight %}
 
-That example is showing the time it takes to do an image enchancement in our CSI: New York image enchancement service.
+That example is showing the time it takes to do an image enchancement in our CSI: New York image enchancement app.
 
 ![Enhance](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmt2dnlpemthZHFnMXZhdG8zN3g1b2YzMGVsdzFiNW1kNmVsbmtseSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YxXYm0dkh95zSHCku1/giphy.gif)
 
@@ -134,7 +134,7 @@ if _, err := meter.RegisterCallback(
 }
 {% endhighlight %}
 
-We should also note that **CounterObserver** is an asynchronous instrument. Which means they will periodically invoke a callback function to collect measurements. They were very basic examples that I have provided, but hopefully in the future I can link a repository with some better and more fleshed out real-world examples.
+We should also note that **CounterObserver** is an asynchronous instrument, and that means it will periodically invoke a callback function to collect measurements. They were very basic examples that I have provided, but hopefully in the future I can link a repository with some better and more fleshed out real-world examples.
 
 The last step is to choose a backend to send your timeseries metrics to, but as mentioned previously we will cover centralised observability platforms in a later post.
 
