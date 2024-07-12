@@ -68,7 +68,7 @@ Some simple guidance on when to use what:
 
 1. If you need to measure `request_latency` or maybe `request_size`, pick a **Histogram**
 2. If you need to measure things like `processed_requests`, `errors`, `received_bytes`, `disk_reads`, pick a **Counter** if the value is monotonic. Otherwise, use **UpDownCounter** as your instrument type
-3. If you need to measure things like `cpu_time`, `m`emory_usage_bytes`, `memory_utilisation_percentage`, if the value is additive/summable and if the value is monotonic, use **CounterObserver**; otherwise, use **UpDownCounterObserver**. Lastly, if the value is **NOT** additive/summable, use the **GaugeObserver** type.
+3. If you need to measure things like `cpu_time`, `memory_usage_bytes`, `memory_utilisation_percentage`, if the value is additive/summable and if the value is monotonic, use **CounterObserver**; otherwise, use **UpDownCounterObserver**. Lastly, if the value is **NOT** additive/summable, use the **GaugeObserver** type.
 
 ![Lots of dials and metrics](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3dpMmVkNGVwd3Y0cnRhbjV3dDJxOG9ycWl0b3k3ZWo2ZG52ZTJodSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YWbTFXAVxWOn2HEadR/giphy.gif)
 
