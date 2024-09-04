@@ -209,7 +209,7 @@ func insertOrder(ctx context.Context, order *Order) error {
 }
 {% endhighlight %}
 
-### Let's Wrap it up
+### Let's wrap it up
 
 I hope you have found this blog post helpful, and if anything, you have some takeaway pointers to use in your observability practices. Let's do a quick a list of the most important takeaways from this post:
 
