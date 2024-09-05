@@ -50,7 +50,7 @@ A trace is a tree of spans that shows the path that a request makes through an a
 
 ![Tracing Example](/assets/img/media/trace-tree.png)
 
-Now, for some sage advice. All OpenTelemetry backends use span names and some attributes to group similar spans together. To group spans properly, I highly recommend giving them short and concise names. You should aim to have less than 1000 unique span names, for performance reasons. Let's look at some good and bad span names:
+Now, time for some sage advice. All OpenTelemetry backends use span names and some attributes to group similar spans together. To group spans properly, I highly recommend giving them short and concise names. You should aim to have less than 1000 unique span names, for performance reasons. Let's look at some good and bad span names:
 
 **Good**
 
@@ -100,7 +100,7 @@ The observant of you may remember back in my first post in this series, you will
 
 #### Context
 
-This is an important feature of spans. The span context carries information about the span as it propagates through different components and services in the tree.
+Context is an important feature of spans. The span context carries information about the span as it propagates through different components and services in the tree.
 
 The trace/span context is a request-scoped data object such as:
 
@@ -126,7 +126,7 @@ You really do not need to instrument every operation in your code to get the mos
 * `Network operations`, for example, HTTP requests or RPC calls.
 * `Filesystem operations`, for example, reading/writing to files.
 * `Database queries` which combine network and filesystem operations.
-* `Errors and logs`, for example, using structured logging, which from my [first post]({% link _posts/2024-06-24-observability-logs.md %}). in this series you should have some ideas on.
+* `Errors and logs`, for example, using structured logging, which from my [first post]({% link _posts/2024-06-24-observability-logs.md %}) in this series.
 
 ![Track Tracing](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHdrY2VqMzlkYWdhb285cHBjc2FqdnUyM2IyOTRrNXlmN2o4eGhhMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VFwqlu33Ob5ELrRXiw/giphy.gif)
 
