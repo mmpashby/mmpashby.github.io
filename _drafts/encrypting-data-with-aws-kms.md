@@ -30,5 +30,15 @@ Lastly, we should quickly talk about KMS key types, of which there are three:
 
 The last thing we need to quickly discuss in this section is what the AWS Encryption SDK is, and envelope encryption. Straight from the [horse's mouth](https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/introduction.html) again, the AWS Encryption SDK is a client-side encryption library designed to make it easy for everyone to encrypt and decrypt data using industry standards and best practices. It enables you to focus on the core functionality of your application, rather than on how to best encrypt and decrypt your data. The AWS Encryption SDK is provided free of charge under the Apache 2.0 license. 
 
-The security of your encrypted data depends in part on protecting the data key that can decrypt it. One accepted best practice for protecting the data key is to encrypt it. To do this, you need another encryption key, known as a key-encryption key or wrapping key. The practice of using a wrapping key to encrypt data keys is known as envelope encryption. See the two images below for a visual explanation on enevelope encryption:
+The security of your encrypted data depends in part on protecting the data key that can decrypt it. One accepted best practice for protecting the data key is to encrypt it. To do this, you need another encryption key, known as a key-encryption key or wrapping key. The practice of using a wrapping key to encrypt data keys is known as envelope encryption. See the images below for a visual explanation on enevelope encryption:
+
+![AWS Envelope Encryption](/assets/img/media/aws-kms-blogpost-envelope-encryption.gif)
+
+Multiple wrapping keys can be used to encrypt the same data key, which adds some really good fault tolerance/disaster recovery controls:
+
+![AWS Envelope Encryption Wrapper Keys](/assets/img/media/aws-kms-blogpost-wrapper-keys.gif)
+
+Ok, this wraps up all that I wanted to cover about KMS and Enevelope Encryption for now. The AWS documentation is fantastic for further reading if you really want to know more. Now we will run through an example in Python, and call it a day.
+
+## Lets play with Encryption
 
