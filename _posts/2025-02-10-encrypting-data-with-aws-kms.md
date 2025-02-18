@@ -40,5 +40,99 @@ Multiple wrapping keys can be used to encrypt the same data key, which adds some
 
 Ok, this wraps up all that I wanted to cover about KMS and Enevelope Encryption for now. The AWS documentation is fantastic for further reading if you really want to know more. Now we will run through an example in Python, and call it a day.
 
-## Lets play with Encryption
+## Lets play with Envelope Encryption
 
+First of all, we need to import a bunch providers and helpers from the aws cryptographic material providers sdk.
+
+{% highlight python %}
+import boto3
+from aws_cryptographic_material_providers.mpl import AwsCryptographicMaterialProviders
+from aws_cryptographic_material_providers.mpl.config import MaterialProvidersConfig
+from aws_cryptographic_material_providers.mpl.models import CreateAwsKmsKeyringInput
+from aws_cryptographic_material_providers.mpl.references import IKeyring
+from typing import Dict 
+
+import aws_encryption_sdk
+from aws_encryption_sdk import CommitmentPolicy
+{% endhighlight %}
+
+Next, we can create a global variable just purely as an example, with a byte string value. Lets also create the SDK+KMS clients and the encryption context:
+
+{% highlight python %}
+EXAMPLE_DATA: bytes = b"Hello KMS Learners"
+
+
+def encrypt_and_decrypt_with_keyring(kms_key_id: str):
+    client = aws_encryption_sdk.EncryptionSDKClient(
+        commitment_policy=CommitmentPolicy.REQUIRE_ENCRYPT_REQUIRE_DECRYPT
+    )
+
+    kms_client = boto3.client('kms', region_name="us-west-2")
+
+    encryption_context: Dict[str, str] = {
+        "encryption": "example context",
+        "is not": "secret",
+        "but adds": "useful metadata",
+        "that can help you": "be confident that",
+        "the data you are handling": "is what you think it is",
+    }
+{% endhighlight %}
+
+We need to create the KMS keyring next:
+
+{% highlight python %}
+    material_provider: AwsCryptographicMaterialProviders = AwsCryptographicMaterialProviders(
+        config=MaterialProvidersConfig()
+    )
+
+    keyring_input: CreateAwsKmsKeyringInput = CreateAwsKmsKeyringInput(
+        kms_key_id=kms_key_id,
+        kms_client=kms_client
+    )
+
+    kms_keyring: IKeyring = material_provider.create_aws_kms_keyring(
+        input=keyring_input
+    )
+{% endhighlight %}
+
+Next up we want to encrypt our example data, and do a quick assertion to confirm its now ciphertext (encrypted message):
+
+{% highlight python %}
+    ciphertext, _ = client.encrypt(
+        source=EXAMPLE_DATA,
+        keyring=kms_keyring,
+        encryption_context=encryption_context
+    )
+
+    assert ciphertext != EXAMPLE_DATA, \
+        "Ciphertext and plaintext data are the same. Invalid encryption"
+{% endhighlight %}
+
+And lastly, do a quick decryption test:
+
+{% highlight python %}
+    plaintext_bytes, _ = client.decrypt(
+        source=ciphertext,
+        keyring=kms_keyring,
+        # Provide the encryption context that was supplied to the encrypt method
+        encryption_context=encryption_context,
+    )
+
+    assert plaintext_bytes == EXAMPLE_DATA, \
+        "Decrypted plaintext should be identical to the original plaintext. Invalid decryption"
+{% endhighlight %}
+
+This playground example is just demonstrating a single key keyring, have a look at `discovery_multi_keyring` for multi key keyrings.
+
+## Letssss Goooo
+
+Thank you for reading this post and hopefully you found some value in it! Some quick takeaway points:
+
+* We learnt what KMS and the AWS Encryption SDK is, as well as Envelope Encryption.
+* We learnt about the KMS key types, and a little bit of information on each type.
+* You can have multiple wrapping keys for one data key, which is a really nice fault tolerance feature in the event of a disaster.
+* Do you still need to think about things like [salt](https://en.wikipedia.org/wiki/Salt_(cryptography)) for additional hashing of ciphertext? Yes, I highly recommend adding these additional layers of defence in. Remember, your security is only as good as the layers of controls you put in-place to protect your data. 
+* I do recommend thinking about using Customer Managed Keys over AWS Managed/Owned keys, and also thinking about multi-region and multiple wrapping keys. Think about how to reduce blast radiuses in the event of a major security incident.
+
+
+Thanks all, and see you next time!
